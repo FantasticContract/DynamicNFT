@@ -7,13 +7,11 @@ const DECIMAL = 8;
 async function main() {
   const ExampleExternalContract = await ethers.getContractFactory("MockV3Aggregator");
   const exampleExternalContract = await ExampleExternalContract.deploy(DECIMAL, INITIAL_ANSWER);
+  console.log("MockV3Aggregator deployed to:", exampleExternalContract.address);
 
   const MyContract = await hre.ethers.getContractFactory("DynamicNFT");
   const myContract = await MyContract.deploy(INTERVAl, exampleExternalContract.address);
-  
   await myContract.deployed();
-
-  console.log("MockV3Aggregator deployed to:", exampleExternalContract.address);
   console.log("DynamicNFT deployed to:", myContract.address);
 }
 
